@@ -1,7 +1,8 @@
 function nameValid() {
     var name = document.getElementById("inputName").value
+    console.log(name)
     var namestatus = document.getElementById("namestatus");
-    var letters = /^[a-zA-Z\s]*$/;
+    var letters = /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/;
     if (name == "") {
         namestatus.innerHTML = "Field is required"
         return false;
@@ -15,13 +16,38 @@ function nameValid() {
         return false;
     }
 }
+
+function placevalid() {
+    var place = document.getElementById("inputPlace").value
+    console.log(place);
+    var placestatus = document.getElementById("placestatus");
+    var letters = /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/;
+    if (place == "") {
+        placestatus.innerHTML = "Field is required"
+        return false;
+    }
+    else if (place.match(letters)) {
+        placestatus.innerHTML = "";
+        return true;
+    }
+    else {
+        placestatus.innerHTML = "use only characters";
+        return false;
+    }
+}
+
 function PhoneValid() {
     var phone = document.getElementById("inputNumber").value
     var phonestatus = document.getElementById("phonestatus");
-    const letters = /^\d{10,11}$/;
+    let letters = /^\d{10}$/;
     if (phone == "") {
         phonestatus.innerHTML = "Filed is required"
         return false;
+    }
+    else if(phone.length<10||phone.length>10)
+    {
+        phonestatus.innerHTML= "Phone number must be 10 numbers.";
+        return false; 
     }
     else if (phone.match(letters)) {
         phonestatus.innerHTML = "";
@@ -67,3 +93,4 @@ function MessageValid() {
     }
 
 }
+
