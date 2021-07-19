@@ -39,26 +39,50 @@ function placevalid() {
 function PhoneValid() {
     var phone = document.getElementById("inputNumber").value
     var phonestatus = document.getElementById("phonestatus");
-    let letters = /^\d{10}$/;
+    let letters = /^\d+$/;
     if (phone == "") {
         phonestatus.innerHTML = "Filed is required"
         return false;
     }
-    else if(phone.length<10||phone.length>10)
-    {
-        phonestatus.innerHTML= "Phone number must be 10 numbers.";
-        return false; 
-    }
-    else if (phone.match(letters)) {
+    
+    else if (phone.match(letters) && phone.length==10) {
         phonestatus.innerHTML = "";
         return true;
     }
-    else {
-        phonestatus.innerHTML = "invalid number";
-        return false;
-    }
+    
+   
+    else if(phone.length<10)
+    {
+        if(phone.match(letters))
+        {
+            phonestatus.innerHTML = "enter exact 10 numbers"
+            return false;
+        }
 
+        else
+        {
+            phonestatus.innerHTML = "only numbers are allowed"
+            return false;
+        }
+    }
+    else if(phone.length>10)
+    {
+        if(phone.match(letters))
+        {
+            phonestatus.innerHTML = "enter exact 10 numbers"
+            return false;
+        }
+
+        else
+        {
+            phonestatus.innerHTML = "only numbers are allowed"
+            return false;
+        }
+    }
+    
 }
+
+
 function emailValid() {
     var name = document.getElementById("inputEmail4").value
     var emailSpan = document.getElementById("emailstatus");
