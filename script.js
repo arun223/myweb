@@ -1,120 +1,129 @@
-function nameValid() {
-    var name = document.getElementById("inputName").value
-    console.log(name)
-    var namestatus = document.getElementById("namestatus");
-    var letters = /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/;
-    if (name == "") {
-        namestatus.innerHTML = "Field is required"
-        return false;
-    }
-    else if (name.match(letters)) {
-        namestatus.innerHTML = "";
-        return true;
-    }
-    else {
-        namestatus.innerHTML = "use only characters";
-        return false;
-    }
-}
+function nameValid(){
+    var name = $("#inputName").val();
+    var reference = /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/;
 
-function placevalid() {
-    var place = document.getElementById("inputPlace").value
-    console.log(place);
-    var placestatus = document.getElementById("placestatus");
-    var letters = /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/;
-    if (place == "") {
-        placestatus.innerHTML = "Field is required"
-        return false;
-    }
-    else if (place.match(letters)) {
-        placestatus.innerHTML = "";
-        return true;
-    }
-    else {
-        placestatus.innerHTML = "use only characters";
-        return false;
-    }
-}
-
-function PhoneValid() {
-    var phone = document.getElementById("inputNumber").value
-    var phonestatus = document.getElementById("phonestatus");
-    let letters = /^\d+$/;
-    if (phone == "") {
-        phonestatus.innerHTML = "Filed is required"
-        return false;
-    }
-    
-    else if (phone.match(letters) && phone.length==10) {
-        phonestatus.innerHTML = "";
-        return true;
-    }
-    
-   
-    else if(phone.length<10)
+    if(name === "")
     {
-        if(phone.match(letters))
-        {
-            phonestatus.innerHTML = "enter exact 10 numbers"
-            return false;
-        }
-
-        else
-        {
-            phonestatus.innerHTML = "only numbers are allowed"
-            return false;
-        }
+        $("#namestatus").html("This field cannot be empty.");
+        return false;
     }
-    else if(phone.length>10)
+    else if(reference.test(name))
     {
-        if(phone.match(letters))
-        {
-            phonestatus.innerHTML = "enter exact 10 numbers"
-            return false;
-        }
-
-        else
-        {
-            phonestatus.innerHTML = "only numbers are allowed"
-            return false;
-        }
+        $("#namestatus").html("");
+        return true;
     }
-    
+    else{
+        $("#namestatus").html("Only Letters are allowed.");
+        return false;
+    }
 }
-
 
 function emailValid() {
-    var name = document.getElementById("inputEmail4").value
-    var emailSpan = document.getElementById("emailstatus");
-    var letters = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
-    if (name == "") {
-        emailSpan.innerHTML = "Filed is required"
+    var emailfield = $("#inputEmail4").val();
+    var reference = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
+
+    if(emailfield === "")
+    {
+        $("#emailstatus").html("This field cannot be empty.");
         return false;
     }
-    else if (name.match(letters)) {
-        emailSpan.innerHTML = "";
+    else if(reference.test(emailfield))
+    {
+        $("#emailstatus").html("");
         return true;
     }
-    else {
-        emailSpan.innerHTML = "invalid email";
+    else{
+        $("#emailstatus").html("Enter email in correct format.");
         return false;
     }
-
 }
-function MessageValid() {
-    var name = document.getElementById("inputMessage").value
-    var messageSpan = document.getElementById("messagestatus");
 
-    if (name == "") {
-        messageSpan.innerHTML = "Filed is required"
+function phoneValid() {
+    var phone = $("#inputNumber").val();
+    var reference = /^\d+$/;
+
+    if(phone === "")
+    {
+        $("#phonestatus").html("This field cannot be empty.");
         return false;
     }
+    else if(reference.test(phone))
+    {
+        if(phone.length == 10)
+        {
+            $("#phonestatus").html("");
+            return true;
+        }
+        else if(phone.length<10 || phone.length>10)
+        {
+            $("#phonestatus").html("Enter exact 10 numbers");
+            return false;
+        }
+    }
+    else{
+        $("#phonestatus").html("Only numbers are allowed.");
+        return false;
+    }
+}
 
 
-    else {
-        messageSpan.innerHTML = "";
+function placeValid() {
+    var place = $("#inputPlace").val();
+    var reference = /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/;
+
+    if(place === "")
+    {
+        $("#placeStatus").html("This field cannot be empty.");
+        return false;
+    }
+    else if(reference.test(place))
+    {
+        $("#placeStatus").html("");
         return true;
     }
-
+    else{
+        $("#placeStatus").html("Only Letters are allowed.");
+        return false;
+    }
 }
+
+function messageValid() {
+    var name = $("#inputMessage").val();
+    var reference = /^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/;
+
+    if(name === "")
+    {
+        $("#messagestatus").html("This field cannot be empty.");
+        return false;
+    }
+    
+    else{
+        $("#messagestatus").html("");
+        return true;
+    }
+}
+
+$("#inputName").on('keyup',function (){
+        nameValid();
+})
+
+
+$("#inputEmail4").on('keyup',function () {
+        emailValid();
+})
+
+
+$("#inputNumber").on('keyup',function () {
+    
+    phoneValid();
+})
+
+$("#inputPlace").on('keyup',function () {
+    placeValid();  
+})
+
+
+$("#inputMessage").on('keyup',function () {
+   messageValid();
+})
 
