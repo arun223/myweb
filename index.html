@@ -217,7 +217,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="inputPlace">Place</label>
                                     <input  type="text" class="form-control" id="inputPlace"
-                                        placeholder="Your place" name="place" >
+                                        placeholder="Your place" name="place" oninput="this.value=this.value.replace(/[^A-Za-z-,.;'&/.() ]|^ /g,'')">
 
                                     <p id="placeStatus" class="bg-danger text-white"></p>
 
